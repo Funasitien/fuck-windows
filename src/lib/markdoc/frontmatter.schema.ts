@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 const baseSchema = z.object({
   draft: z.boolean().default(false),
@@ -30,6 +30,15 @@ export const blog = z.discriminatedUnion("external", [
     description: z.optional(z.string()),
     ogImagePath: z.optional(z.string()),
     canonicalUrl: z.optional(z.string()),
+    notation: z.optional(z.array(
+      z.object({
+        // Define the properties of the objects in the 'notation' array
+        complexity: z.optional(z.number()),
+        ui: z.optional(z.number()),
+        customization: z.optional(z.number()),
+        updates: z.optional(z.number()),
+      })
+    )),
   }),
   // external link
   baseSchema.extend({

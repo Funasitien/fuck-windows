@@ -1,0 +1,140 @@
+---
+import { readAll } from "../lib/markdoc/read";
+import { blog } from "../lib/markdoc/frontmatter.schema";
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+import { SITE_TITLE } from "../config";
+
+const posts = await readAll({
+  directory: "blog",
+  frontmatterSchema: blog,
+});
+
+const sortedPosts = posts
+  .filter((p) => p.frontmatter.draft !== true)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
+---
+
+<PageLayout>
+  <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main">
+    {
+      sortedPosts.map((post) => {
+        const formattedDate = new Date(
+          post.frontmatter.date
+        ).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+        return (
+          <div class="relative mb-4">
+            <a
+              href={'/blog/' + post.slug}
+              class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+              <img
+                class="object-cover w-full rounded-t-lg h-20 md:h-32 md:w-32 md:rounded-none md:rounded-s-lg p-2 lg:p-4"
+                src={post.frontmatter.ogImagePath || "/favicon.ico"}
+                alt=""
+              />
+              <div class="flex flex-col justify-between p-4 leading-normal">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {post.frontmatter.title}
+                </h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                  {post.frontmatter.description}
+                </p>
+                
+
+                <div class="flex items-center">
+                  <h1>UI:</h1>
+                    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                    <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                    </svg>
+                </div>
+
+                {post.frontmatter.notation ? (
+                  
+
+                  <ul>
+                    <li>
+                      Complexity: {post.frontmatter.notation[0].complexity}
+                    </li>
+                    <li>
+                      Customization:{" "}
+                      {post.frontmatter.notation[2].customization}
+                    </li>
+                    <li>UI: {post.frontmatter.notation[1].ui}</li>
+                    <li>
+                      Easely to maintain: {post.frontmatter.notation[3].updates}
+                    </li>
+                  </ul>
+                ) : null}
+              </div>
+            </a>
+            {post.frontmatter.notation ? (
+              <button
+              data-tooltip-target={post.frontmatter.title}
+                class:list={[
+                  "absolute top-1 mr-1 right-32 w-10 h-10 rounded-lg flex justify-center items-center text-xl",
+                  post.frontmatter.notation[0].complexity === 3
+                    ? "text-red-500 bg-red-300 dark:bg-red-800"
+                    : post.frontmatter.notation[0].complexity === 2
+                    ? "text-amber-500 bg-amber-300 dark:bg-amber-800"
+                    : post.frontmatter.notation[0].complexity === 1
+                    ? "text-green-500 bg-green-300 dark:bg-green-800"
+                    : "text-slate-500 bg-slate-300 dark:bg-slate-800",
+                ]}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24">
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 13V4M7 14H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2m-1-5l-4 5l-4-5m9 8h.01"
+                  />
+                </svg>
+              </button>
+              <div
+                  id={post.frontmatter.title}
+                  role="tooltip"
+                  class="z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  {post.frontmatter.notation[0].complexity === 3
+                    ? "Complexity: High"
+                    : post.frontmatter.notation[0].complexity === 2
+                      ? "Complexity: Medium"
+                    : post.frontmatter.notation[0].complexity === 1
+                      ? "Complexity: Low"
+                      : "Complexity: Unknown"}
+                  <div class="tooltip-arrow" data-popper-arrow />
+                </div>
+            ) : (
+              ""
+            )}
+          </div>
+        );
+      })
+    }
+  </section>
+</PageLayout>
