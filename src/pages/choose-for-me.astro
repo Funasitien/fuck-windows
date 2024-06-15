@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/ChooseForMe.astro";
+import IconCard from "../components/IconCard.astro";
+---
+
+<Layout title="ChooseForMe" description="Lost in the imenseity of linux ?">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <IconCard
+      title="For Linux Experts"
+      body="Test"
+      icon="tabler:stars-filled"
+      button="Start the Quiz"
+      href="autox/expert"
+    />
+    <IconCard
+      title="For Linux Beginners"
+      body="Test"
+      icon="tabler:lifebuoy"
+      button="Start the Quiz"
+      href="autox/beginner"
+    />
+  </div>
+</Layout>
