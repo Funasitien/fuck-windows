@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/InfoForMe.astro";
+import ImageCard from "../../components/ImageCard.astro";
+---
+
+<Layout
+  title="ChooseForMe - GUI"
+  description="Shall be the difficulty to setup, then next page to maintain, then performances and lastly GUI (or even inside notation cards)"
+  body="The first and most import thing you can edit while using linux is the user interface (or GUI). <br / >This is the first thing you see when you boot up your computer. It's the desktop, the windows, the icons... <br/> Here are the following, most knowed/used GUI :"
+  button="Next">
+  <div
+    class="grid grid-cols-1 lg:grid-cols-3 items-center mx-4 lg:mx-10 gap-4 justify-items-center">
+    <ImageCard
+      title="GNOME"
+      body="With the navbar at the left, a clasic of Ubuntu, Fedora, Debian..."
+      href="ui?gui=gnome"
+      button="Next"
+      img="/desktop/gnome.png"
+    />
+    <ImageCard
+      title="XFCE Plasma"
+      body="More like a Windows computer - for the taskbar & the menu"
+      href="ui?gui=xfce"
+      button="Next"
+      img="/desktop/plasma.png"
+    />
+    <ImageCard
+      title="Hyprland"
+      body="Complex but very customizable. With a lot of themes and extensions."
+      href="ui"
+      button="Next"
+      img="/desktop/hyprland.gif"
+    />
+  </div>
+</Layout>
