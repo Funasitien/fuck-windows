@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/InfoForMe.astro";
+import ImageCard from "../../components/ImageCard.astro";
+
+// In your Astro component file
+let images = ["/desktop/hyprland-1.png", "/image2.jpg", "/image3.jpg"];
+
+let currentIndex = 0;
+let cycleCount = 0;
+let maxCycles = 3; // Number of times to cycle through the images
+
+function rotateImages() {
+  currentIndex++;
+  if (currentIndex >= images.length) {
+    currentIndex = 0;
+    cycleCount++;
+  }
+}
+
+let interval = setInterval(rotateImages, 3000); // Change image every 3 seconds
+
+// Stop the interval after the maximum number of cycles
+if (cycleCount >= maxCycles) {
+  clearInterval(interval);
+}
+---
+
+<Layout
+  title="ChooseForMe - GUI"
+  description="Let's start with the User Interface!"
+  body="The first and most import thing you can edit while using linux is the user interface (or GUI). <br / >This is the first thing you see when you boot up your computer. It's the desktop, the windows, the icons... <br/> Here are the following, most knowed/used GUI :"
+  button="Next">
+  {currentIndex}
+  <div class="grid grid-cols-1 lg:grid-cols-3 items-center mx-4 lg:mx-10 gap-4">
+    <ImageCard
+      title="ChooseForMe - Quick Start"
+      body="Let's start with the User Interface!"
+      href="ui"
+      button="Next"
+      img="/desktop/gnome.png"
+    />
+    <ImageCard
+      title="ChooseForMe - Quick Start"
+      body="Let's start with the User Interface!"
+      href="ui"
+      button="Next"
+      img="/desktop/plasma.png"
+    />
+    <ImageCard
+      title="ChooseForMe - Quick Start"
+      body="Let's start with the User Interface!"
+      href="ui"
+      button="Next"
+      img={images[currentIndex]}
+    />
+  </div>
+</Layout>

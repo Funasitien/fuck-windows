@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+import Meta from "./Meta.astro";
+---
+
+<!doctype html>
+<html lang="en" class="overflow-hidden">
+  <head>
+    <Meta />
+    <title>{title}</title>
+  </head>
+  <body>
+    <section class="bg-white dark:bg-gray-900 min-h-screen">
+      <div
+        class="min-w-screen pt-20 text-gray-500 sm:text-lg dark:text-gray-400 flex flex-col items-center">
+        <h2
+          class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">
+          {title}
+        </h2>
+        <p class="mb-4 font-light">
+          {description}
+        </p>
+        <slot />
+      </div>
+    </section>
+  </body>
+</html>
